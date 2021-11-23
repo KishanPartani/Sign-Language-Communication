@@ -1,4 +1,5 @@
 from nltk import text
+from nltk.util import pr
 import pandas as pd
 import numpy as np
 from nltk.corpus import stopwords
@@ -7,7 +8,7 @@ import os
 import cv2
 
 def datalist():
-    mylist = os.listdir("ISL_Dataset_C/")
+    mylist = os.listdir(os.getcwd() + '/static/dataset')
     ls = []
     for x in mylist:
         ls.append(os.path.splitext(x)[0])
@@ -35,19 +36,34 @@ def cartoonize(img, ds_factor=4, sketch_mode=False):
     dst = cv2.bitwise_and(img_output, img_output, mask=mask)
     return dst
 
+def gen_frames(camera):  
+    while True:
+        success, frame = camera.read()  # read the camera frame
+        if not success:
+            break
+        else:
+            ret, buffer = cv2.imencode('.jpg', cartoonize(frame, sketch_mode=False))
+            frame = buffer.tobytes()
+            yield (b'--frame\r\n'
+                   b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')  # concat frame one by one and show result
+
+
 def convert(text):
+    print('hello')
     text = text.title()
     #print(text)
     word_Lemmatized = WordNetLemmatizer()
     text = word_Lemmatized.lemmatize(text)
-    #print(text)
+    print(text)
     ls = datalist()
-    #print(ls)
+    print(ls)
     if(text == 'Bye'):
         print('Good Bye !!')
         exit
     elif(text in ls):
-        cap = cv2.VideoCapture('ISL_Dataset_C/' + text + '.mp4')
+        temp_ls = os.listdir()
+        print(temp_ls)
+        cap = cv2.VideoCapture('static/dataset/'+ text + '.mp4')
         if (cap.isOpened()== False): 
             print("Error opening video file")
             exit
@@ -64,7 +80,7 @@ def convert(text):
     else:
         print("Sorry, currently we don't have the word in our back end !")
 
-if __name__ == '__main__':
+"""if __name__ == '__main__':
     print('Enter text: ')
     text = input()
-    convert(text)
+    convert(text)"""
