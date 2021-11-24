@@ -6,9 +6,10 @@ body {
 .img {
   background-size:contain;
   background-repeat: no-repeat;
+  
 }
 .login-box {
-  background-color: black;
+  background-color: transparent;
   width: 100%;
   margin: auto;
   max-width: 525px;
@@ -17,7 +18,7 @@ body {
 }
 
 .login-snip {
-  background-color: black;
+  background-color: transparent;
   width: 100%;
   height: 100%;
   position: absolute;
