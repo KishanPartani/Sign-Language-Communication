@@ -196,7 +196,7 @@ a {
 .card {
   width: 500px;
   left: 100px;
-  background-color: black;
+  background-color: transparent;
 }
 
 ::placeholder {
