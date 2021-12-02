@@ -652,9 +652,9 @@ section {
 --------------------------------------------------------------*/
 .cta {
   background: linear-gradient(rgba(2, 2, 2, 0.5), rgba(0, 0, 0, 0.5)),
-    url("../img/cta-bg.jpg") fixed center center;
+    url("../img/7.png") fixed center center;
   background-size: cover;
-  padding: 60px 0;
+  padding: 30px 0;
 }
 .cta h3 {
   color: #fff;
@@ -854,7 +854,7 @@ section {
 # Counts
 --------------------------------------------------------------*/
 .counts .content {
-  padding: 30px 0;
+  padding: 20px 0;
 }
 .counts .content h3 {
   font-weight: 700;
@@ -902,7 +902,7 @@ section {
   color: #626262;
 }
 .counts .image {
-  background: url("../img/counts-img.jpg") center center no-repeat;
+  background: url("../img/5.png") center center no-repeat;
   background-size: cover;
   min-height: 400px;
 }
@@ -1382,6 +1382,7 @@ section {
 #footer .copyright {
   text-align: center;
   padding-top: 30px;
+  padding-left: 50px;
 }
 #footer .credits {
   padding-top: 10px;
