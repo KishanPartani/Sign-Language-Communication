@@ -161,6 +161,27 @@ h6 {
   max-height: 40px;
 }
 
+.upload-btn{
+  width: 200px;
+}
+.search-btn{
+  width: 150px;
+  color: #514226  ;
+  border-radius: 4px;
+  padding: 7px 25px 8px 25px;
+  white-space: nowrap;
+  transition: 0.3s;
+  font-size: 14px;
+  display: inline-block;
+  border: 2px solid #514226;;
+}
+.search-btn:hover{
+  background:#514226; ;
+  color: #fff;
+}
+.form-control::placeholder{
+  color: #514226;
+}
 /*--------------------------------------------------------------
 #  Get Startet Button
 --------------------------------------------------------------*/
