@@ -6,6 +6,7 @@ from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 import os
 import cv2
+from werkzeug.utils import redirect
 
 def datalist():
     mylist = os.listdir(os.getcwd() + '/static/dataset')
@@ -46,6 +47,7 @@ def gen_frames(camera):
             frame = buffer.tobytes()
             yield (b'--frame\r\n'
                    b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')  # concat frame one by one and show result
+    return redirect('index.html')
 
 
 def convert(text):

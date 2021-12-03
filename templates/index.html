@@ -1,18 +1,674 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Hello</h1>
-    <form name="f1" action="/text_gest" method="post">
-        <input type="text" name="text"></input>
-        <input type="submit">submit</input>
-    </form>
-    <br><br>
-    <img src="{{ url_for('text_gest') }}" width="100%">
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>ISL Buddy</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
+
+    <!-- Favicons -->
+    <link href="../static/assets/img/favicon.png" rel="icon" />
+    <link href="../static/assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+      rel="stylesheet"
+    />
+
+    <!-- Vendor CSS Files -->
+    <link href="../static/assets/vendor/aos/aos.css" rel="stylesheet" />
+    <link
+      href="../static/assets/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="../static/assets/vendor/bootstrap-icons/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link href="../static/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+    <link
+      href="../static/assets/vendor/glightbox/css/glightbox.min.css"
+      rel="stylesheet"
+    />
+    <link href="../static/assets/vendor/remixicon/remixicon.css" rel="stylesheet" />
+    <link href="../static/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+      crossorigin="anonymous"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kanit:wght@500&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Template Main CSS File -->
+    <link href="../static/assets/css/style.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top">
+      <div
+        class="container d-flex align-items-center justify-content-lg-between"
+      >
+        <h1 class="logo me-auto me-lg-0">
+          <a href="index.html"><img src="../static/assets/img/icon.png" /></a>
+        </h1>
+
+        <nav id="navbar" class="navbar order-last order-lg-0">
+          <ul>
+            <li>
+              <a class="nav-link scrollto active" href="#hero"
+                >Home <i class="fa fa-home icon-white" aria-hidden="true"></i
+              ></a>
+            </li>
+            <li><a class="nav-link scrollto" href="#about">About</a></li>
+            <li class="dropdown">
+              <a href="#"
+                ><span>Drop Down</span> <i class="bi bi-chevron-down"></i
+              ></a>
+              <ul>
+                <li><a href="#text2sign">Text to Sign</a></li>
+                <li><a href="#sign2text">Sign to Text</a></li>
+              </ul>
+            </li>
+            <li><a class="nav-link scrollto" href="#cta">Stats</a></li>
+            <li><a class="nav-link scrollto" href="#team">Team</a></li>
+
+            <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+          </ul>
+          <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav>
+        <!-- .navbar -->
+
+        <a href="/login-page" class="get-started-btn scrollto">Login</a>
+        <h5 style="color: #ebe7e4;">Hello, {{email}}</h5>
+      </div>
+    </header>
+    <!-- End Header -->
+
+    <!-- ======= Hero Section ======= -->
+    <section id="hero" class="d-flex align-items-center justify-content-center">
+      <div class="container" data-aos="fade-up">
+        <div
+          class="row justify-content-center"
+          data-aos="fade-up"
+          data-aos-delay="150"
+        >
+          <div class="col-xl-6 col-lg-8">
+            <h1>Sign Language</h1>
+            <h2>An Art of Communication</h2>
+          </div>
+        </div>
+
+        <div
+          class="row gy-4 mt-5 justify-content-center"
+          data-aos="zoom-in"
+          data-aos-delay="250"
+        >
+          <div class="col-xl-2 col-md-4">
+            <div class="icon-box">
+              <i class="ri-store-line"></i>
+              <h3><a href="#text2sign">Text to Sign</a></h3>
+            </div>
+          </div>
+          <div class="col-xl-2 col-md-4">
+            <div class="icon-box">
+              <i class="ri-bar-chart-box-line"></i>
+              <h3><a href="#sign2text">Sign to Text</a></h3>
+            </div>
+          </div>
+          <div class="col-xl-2 col-md-4">
+            <div class="icon-box">
+              <i class="ri-calendar-todo-line"></i>
+              <h3><a href="">Human Intervention</a></h3>
+            </div>
+          </div>
+          <!-- <div class="col-xl-2 col-md-4">
+            <div class="icon-box">
+              <i class="ri-paint-brush-line"></i>
+              <h3><a href="">Magni Dolores</a></h3>
+            </div>
+          </div>
+          <div class="col-xl-2 col-md-4">
+            <div class="icon-box">
+              <i class="ri-database-2-line"></i>
+              <h3><a href="">Nemos Enimade</a></h3>
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </section>
+    <!-- End Hero -->
+
+    <main id="main">
+      <!-- ======= About Section ======= -->
+      <section id="about" class="about">
+        <div class="container" data-aos="fade-up">
+          <div class="row">
+            <div
+              class="col-lg-6 order-1 order-lg-2"
+              data-aos="fade-left"
+              data-aos-delay="100"
+            >
+              <img src="../static/assets/img/2.webp" class="img-fluid" alt="" />
+            </div>
+            <div
+              class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content"
+              data-aos="fade-right"
+              data-aos-delay="100"
+            >
+              <h3>Indian Sign Language</h3>
+              <p class="fst-italic">
+                &emsp; &emsp; Sign language is the equal of speech, lending
+                itself equally to the rigorous and the poetic, to philosophical
+                analysis or to making love.
+              </p>
+              <p style="text-align: justify">
+                Sign languages (also called signed languages) are languages that
+                use the visual-manual modality to convey that means. Sign
+                languages are expressed through manual articulations together
+                with non-manual parts. Sign languages are full-fledged natural
+                languages with their own synchronic linguistics and lexicon.
+              </p>
+              <p style="text-align: justify">
+                Indian Sign Language (ISL) is the predominant sign language in
+                the Indian subcontinent, used by at least 7 million deaf
+                signers. As of 2021, it is the most used sign language in the
+                world, and Ethnologue ranks it as the 151th most "spoken"
+                language in the world.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- End About Section -->
+
+      <!-- ======= Clients Section ======= -->
+      <section id="clients" class="clients">
+        <div class="container" data-aos="zoom-in">
+          <div class="clients-slider swiper">
+            <div class="swiper-wrapper align-items-center">
+              <div class="swiper-slide">
+                <img src="../static/assets/img/letters/a.jpg" class="img-fluid" alt="" />
+              </div>
+              <div class="swiper-slide">
+                <img src="../static/assets/img/letters/b.jpg" class="img-fluid" alt="" />
+              </div>
+              <div class="swiper-slide">
+                <img src="../static/assets/img/letters/c.jpg" class="img-fluid" alt="" />
+              </div>
+              <div class="swiper-slide">
+                <img src="../static/assets/img/letters/d.jpg" class="img-fluid" alt="" />
+              </div>
+              <div class="swiper-slide">
+                <img src="../static/assets/img/letters/e.jpg" class="img-fluid" alt="" />
+              </div>
+              <div class="swiper-slide">
+                <img src="../static/assets/img/letters/f.jpg" class="img-fluid" alt="" />
+              </div>
+            </div>
+            <div class="swiper-pagination"></div>
+          </div>
+        </div>
+      </section>
+      <!-- End Clients Section -->
+
+      <!-- ======= Text to Sign Section ======= -->
+      <section id="text2sign" style="padding-top: 80px" class="features">
+        <div class="container" data-aos="fade-up">
+          <div class="row zoom" style="background-color: #ebe7e4">
+            <div
+              class="image col-lg-6"
+              style="background-image: url('../static/assets/img/3.jpg')"
+              data-aos="fade-right"
+            ></div>
+            <!-- <div class="col-lg-6">
+              <video
+                width="100%"
+                src="assets/Afghanistan.mp4"
+                type="video/mp4"
+                controls
+              ></video>
+            </div> -->
+
+            <div
+              class="
+                col-lg-6
+                pt-4 pt-lg-0
+                order-2 order-lg-1
+                content
+                text-center
+              "
+              data-aos="fade-left"
+              data-aos-delay="100"
+              style="background-color: #ebe7e4"
+            >
+              <h2
+                class="pb-3"
+                style="
+                  margin-top: 4em;
+                  color: #514226;
+                  font-family: 'Kanit', sans-serif;
+                "
+              >
+                Text to Sign Conversion
+              </h2>
+              <form name="f1" action="/text_gest" method="post">
+                <!-- <div class="form-group">
+                  <input placeholder="Enter a word to be Searched" style="width: 300px;" class="form-control" id="word" type="text"/>
+                </div> -->
+                <div class="row" style="color: #514226">
+                  <div class="col-lg-1"></div>
+                  <div class="col-lg-3 pt-1">
+                    <label for="word"><strong>Enter a word :</strong></label>
+                  </div>
+                  <div class="col-lg-6">
+                    <input
+                      placeholder="Enter a word to be Searched"
+                      class="form-control"
+                      id="word"
+                      type="text"
+                      name="text"
+                      color="#514226;"
+                    />
+                  </div>
+                </div>
+
+                <br />
+                <button class="btn search-btn mt-3" type="submit">
+                  Search
+                </button>
+                <button class="btn search-btn mt-3">Raise a concern</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="text-center mb-5 p-5">
+        <img src="../static/assets/img/div.png" />
+      </div>
+      <!-- Sign to Text Section -->
+
+      <section id="sign2text" style="padding-top: 80px" class="features">
+        <div class="container" data-aos="fade-up">
+          <div class="row zoom" style="background-color: #000">
+            <!-- <div class="col-lg-6">
+              <video
+                width="100%"
+                src="assets/Afghanistan.mp4"
+                type="video/mp4"
+                controls
+              ></video>
+            </div> -->
+
+            <div
+              class="col-lg-6 pt-4 pt-lg-0 content text-center"
+              data-aos="fade-right"
+              data-aos-delay="100"
+            >
+              <h3
+                class="text-white pb-4"
+                style="margin-top: 150px; font-family: 'Kanit', sans-serif"
+              >
+                Sign to Text Conversion
+              </h3>
+              <form>
+                <button class="btn get-started-btn upload-btn" type="submit ">
+                  <strong> Upload </strong>
+                </button>
+                <button class="btn get-started-btn upload-btn" type="submit">
+                  <strong> Start Webcam </strong>
+                </button>
+              </form>
+              <br />
+              <blockquote class="blockquote pt-2">
+                <footer class="blockquote-footer">
+                  <cite title="Source Title"
+                    >Please make sure waist is visible</cite
+                  >
+                </footer>
+              </blockquote>
+            </div>
+            <div
+              class="image col-lg-6"
+              style="background-image: url('../static/assets/img/8.jpg')"
+              data-aos="fade-left"
+            ></div>
+          </div>
+        </div>
+      </section>
+
+      <div class="text-center p-2 mb-5">
+        <img src="../static/assets/img/hr2.png" width="40%" />
+      </div>
+
+      <!-- ======= Cta Section ======= -->
+      <section id="cta" class="cta">
+        <div class="container" data-aos="zoom-in">
+          <div class="text-center">
+            <h3>Call To Action</h3>
+            <p>
+              Human eyes are the sign language of the brain. If you watch them
+              carefully, you can see the truth played out, raw and unguarded.
+            </p>
+          </div>
+        </div>
+      </section>
+      <!-- End Cta Section -->
+
+      <!-- ======= Counts Section ======= -->
+      <section id="counts" class="counts">
+        <div class="container" data-aos="fade-up">
+          <div class="row no-gutters">
+            <div
+              class="
+                image
+                col-xl-5
+                d-flex
+                align-items-stretch
+                justify-content-center justify-content-lg-start
+              "
+              data-aos="fade-right"
+              data-aos-delay="100"
+            ></div>
+            <div
+              class="col-xl-7 ps-0 ps-lg-5 pe-lg-1 d-flex align-items-stretch"
+              data-aos="fade-left"
+              data-aos-delay="100"
+            >
+              <div class="content d-flex flex-column justify-content-center">
+                <h3 style="text-align: center">Numbers that Speak</h3>
+                <p>&emsp;</p>
+                <div class="row">
+                  <div class="col-md-6 d-md-flex align-items-md-stretch">
+                    <div class="count-box">
+                      <i class="bi bi-journal-richtext"></i>
+                      <span
+                        data-purecounter-start="0"
+                        data-purecounter-end="300"
+                        data-purecounter-duration="2"
+                        class="purecounter"
+                      ></span>
+                      <p>different sign languages in use around the world.</p>
+                    </div>
+                  </div>
+                  <div class="col-md-6 d-md-flex align-items-md-stretch">
+                    <div class="count-box">
+                      <i class="bi bi-award"></i>
+                      <span
+                        data-purecounter-start="0"
+                        data-purecounter-end="40"
+                        data-purecounter-duration="2"
+                        class="purecounter"
+                      ></span>
+                      <p>percent of families use sign language at home.</p>
+                    </div>
+                  </div>
+                  <div class="col-md-6 d-md-flex align-items-md-stretch">
+                    <div class="count-box">
+                      <i class="bi bi-emoji-smile"></i>
+                      <span
+                        style="display: inline; margin-left: 10px"
+                        data-purecounter-start="0"
+                        data-purecounter-end="63"
+                        data-purecounter-duration="2"
+                        class="purecounter"
+                      ></span
+                      ><span style="display: inline; margin-left: 0">M</span>
+                      <p>
+                        people in India suffer from either complete or partial
+                        deafness
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6 d-md-flex align-items-md-stretch">
+                    <div class="count-box">
+                      <i class="bi bi-clock"></i>
+                      <span
+                        style="display: inline; margin-left: 10px"
+                        data-purecounter-start="0"
+                        data-purecounter-end="5"
+                        data-purecounter-duration="2"
+                        class="purecounter"
+                      ></span
+                      ><span style="display: inline; margin-left: 0">M</span>
+                      <p>
+                        people in India who suffer from either complete or
+                        partial deafness are children.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- End .content-->
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- End Counts Section -->
+
+      <!-- ======= Team Section ======= -->
+      <section id="team" class="team">
+        <div class="container" data-aos="fade-up">
+          <div class="section-title">
+            <h2>Team</h2>
+            <p>Check our Team</p>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+              <div class="member" data-aos="fade-up" data-aos-delay="100">
+                <div class="member-img">
+                  <img
+                    src="../static/assets/img/team/balaji.jpg"
+                    class="img-fluid"
+                    alt=""
+                  />
+                  <div class="social">
+                    <a href=""><i class="bi bi-linkedin"></i></a>
+                    <a href=""><i class="bi bi-github"></i></a>
+                    <a href=""><i class="bi bi-twitter"></i></a>
+                    <a href=""><i class="bi bi-instagram"></i></a>
+                  </div>
+                </div>
+                <div class="member-info">
+                  <h4>Balaji Padamwar</h4>
+                  <span></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+              <div class="member" data-aos="fade-up" data-aos-delay="200">
+                <div class="member-img">
+                  <img
+                    src="../static/assets/img/team/kishan.jpg"
+                    class="img-fluid"
+                    alt=""
+                  />
+                  <div class="social">
+                    <a href=""><i class="bi bi-linkedin"></i></a>
+                    <a href=""><i class="bi bi-github"></i></a>
+                    <a href=""><i class="bi bi-twitter"></i></a>
+                    <a href=""><i class="bi bi-instagram"></i></a>
+                  </div>
+                </div>
+                <div class="member-info">
+                  <h4>Kishan Partani</h4>
+                  <span></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+              <div class="member" data-aos="fade-up" data-aos-delay="300">
+                <div class="member-img">
+                  <img
+                    src="../static/assets/img/team/shriram.jpg"
+                    class="img-fluid"
+                    alt=""
+                  />
+                  <div class="social">
+                    <a href=""><i class="bi bi-linkedin"></i></a>
+                    <a href=""><i class="bi bi-github"></i></a>
+                    <a href=""><i class="bi bi-twitter"></i></a>
+                    <a href=""><i class="bi bi-instagram"></i></a>
+                  </div>
+                </div>
+                <div class="member-info">
+                  <h4>Shriram Pareek</h4>
+                  <span></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+              <div class="member" data-aos="fade-up" data-aos-delay="400">
+                <div class="member-img">
+                  <img
+                    src="../static/assets/img/team/mubasheer.jpg"
+                    class="img-fluid"
+                    alt=""
+                  />
+                  <div class="social">
+                    <a href=""><i class="bi bi-linkedin"></i></a>
+                    <a href=""><i class="bi bi-github"></i></a>
+                    <a href=""><i class="bi bi-twitter"></i></a>
+                    <a href=""><i class="bi bi-instagram"></i></a>
+                  </div>
+                </div>
+                <div class="member-info">
+                  <h4>Mubasheer Siddiqui</h4>
+                  <span></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- End Team Section -->
+
+      <!-- ======= Contact Section ======= -->
+      <section id="contact" class="contact">
+        <div class="container" data-aos="fade-up">
+          <div class="section-title">
+            <h2>Contact</h2>
+            <p>Contact Us</p>
+          </div>
+
+          <div>
+            <iframe
+              style="border: 0; width: 100%; height: 270px"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3784.442016579043!2d73.8660096501799!3d18.463626975671247!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2ea950f616219%3A0x321bdae2cea9f064!2sVishwakarma%20Institute%20of%20Technology!5e0!3m2!1sen!2sin!4v1638437004743!5m2!1sen!2sin"
+              frameborder="0"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </div>
+      </section>
+      <!-- End Contact Section -->
+    </main>
+    <!-- End #main -->
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
+      <div class="footer-top">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-3 col-md-6">
+              <div class="footer-info">
+                <h3>ISL Buddy<span>.</span></h3>
+                <p>
+                  Upper Indira Nagar<br />
+                  Bibwewadi, Pune<br />
+                  Maharashtra 411037 <br /><br />
+                  <strong>Phone:</strong> +1 5589 55488 55<br />
+                  <strong>Email:</strong> info@example.com<br />
+                </p>
+                <div class="social-links mt-3">
+                  <a href="#" class="google-plus"
+                    ><i class="bx bxl-github"></i
+                  ></a>
+                  <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+                  <a href="#" class="facebook"
+                    ><i class="bx bxl-facebook"></i
+                  ></a>
+                  <a href="#" class="instagram"
+                    ><i class="bx bxl-instagram"></i
+                  ></a>
+
+                  <a href="#" class="linkedin"
+                    ><i class="bx bxl-linkedin"></i
+                  ></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-2 col-md-6 footer-links">
+              <h4>Useful Links</h4>
+              <ul>
+                <li>
+                  <i class="bx bx-chevron-right"></i> <a href="#">Home</a>
+                </li>
+                <li>
+                  <i class="bx bx-chevron-right"></i>
+                  <a href="#about">About us</a>
+                </li>
+                <li>
+                  <i class="bx bx-chevron-right"></i>
+                  <a href="#text2sign">Text to Sign </a>
+                </li>
+                <li>
+                  <i class="bx bx-chevron-right"></i>
+                  <a href="#sign2text">Sign to Text</a>
+                </li>
+                <li>
+                  <i class="bx bx-chevron-right"></i>
+                  <a href="#team">Teams</a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="col-lg-7">
+              <img src="../static/assets/img/icon.png" class="img-fluid" />
+
+              <div class="copyright" style="align-items: center">
+                &copy; Copyright <strong><span>ISL Buddy</span></strong
+                >. All Rights Reserved
+              </div>
+              <div class="credits">Designed by <a href="">MBSK</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- End Footer -->
+
+    <div id="preloader"></div>
+    <a
+      href="#"
+      class="back-to-top d-flex align-items-center justify-content-center"
+      ><i class="bi bi-arrow-up-short"></i
+    ></a>
+
+    <!-- Vendor JS Files -->
+    <script src="../static/assets/vendor/purecounter/purecounter.js"></script>
+    <script src="../static/assets/vendor/aos/aos.js"></script>
+    <script src="../static/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../static/assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="../static/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="../static/assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="../static/assets/js/main.js"></script>
+  </body>
 </html>
