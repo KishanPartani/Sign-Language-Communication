@@ -89,7 +89,7 @@
         <!-- .navbar -->
 
         <a href="/login-page" class="get-started-btn scrollto">Login</a>
-        <h5 style="color: #ebe7e4;">Hello, {{email}}</h5>
+        <!--<h5 style="color: #ebe7e4;">Hello, {{email}}</h5>-->
       </div>
     </header>
     <!-- End Header -->
@@ -238,7 +238,16 @@
                 controls
               ></video>
             </div> -->
-
+            {% if video %}
+            <div class="col-lg-6">
+                <video
+                  width="100%"
+                  src={{video}}
+                  type="video/mp4"
+                  controls
+                ></video>
+            </div>
+            {% else %}
             <div
               class="
                 col-lg-6
@@ -289,6 +298,7 @@
                 <button class="btn search-btn mt-3">Raise a concern</button>
               </form>
             </div>
+            {% endif %}
           </div>
         </div>
       </section>

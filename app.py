@@ -3,11 +3,13 @@ from flask import Flask, render_template, url_for, request, flash, redirect, jso
 from flask_cors import CORS, cross_origin
 from flask_bcrypt import Bcrypt
 from Helpers import text2gest as tg
+from Helpers import gest2text as gt
 import os
 import sys
 from nltk.stem import WordNetLemmatizer
 import cv2
 import webbrowser
+from tensorflow import keras
 
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
@@ -75,13 +77,20 @@ def text_gest():
         exit
     elif(text in ls):
         print('debug')
-        cap = cv2.VideoCapture('static/dataset/'+ text + '.mp4')
+        #cap = cv2.VideoCapture('static/dataset/'+ text + '.mp4')
+        video = 'static/dataset/'+text+'.mp4'
     #Human Intervention Part
     else:
         print("Sorry, currently we don't have the word in our back end !")
-    return Response(tg.gen_frames(cap), mimetype='multipart/x-mixed-replace; boundary=frame')
-    #tg.convert(text)
-    #return render_template('index.html')
+    #return Response(tg.gen_frames(cap), mimetype='multipart/x-mixed-replace; boundary=frame')
+    return render_template('index.html', video=video, alert='working')
+
+@app.route("/gest_text", methods=['GET', 'POST'])
+def gest_text():
+    model = gt.model
+    
+
+
 
 if __name__ == "__main__":
     print('Server Started !!')
