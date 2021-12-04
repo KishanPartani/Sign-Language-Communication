@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>Human Intervention</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
+
+    <!-- Favicons -->
+    <link href="../static/assets/img/favicon.png" rel="icon" />
+    <link href="../static/assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+      rel="stylesheet"
+    />
+
+    <!-- Vendor CSS Files -->
+    <link href="../static/assets/vendor/aos/aos.css" rel="stylesheet" />
+    <link
+      href="../static/assets/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="../static/assets/vendor/bootstrap-icons/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link href="../static/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+    <link
+      href="../static/assets/vendor/glightbox/css/glightbox.min.css"
+      rel="stylesheet"
+    />
+    <link href="../static/assets/vendor/remixicon/remixicon.css" rel="stylesheet" />
+    <link href="../static/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+      crossorigin="anonymous"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kanit:wght@500&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Template Main CSS File -->
+    <link href="../static/assets/css/style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- ======= Header ======= -->
+    <header
+      id="header"
+      class="fixed-top"
+      style="background: rgba(0, 0, 0, 0.8)"
+    >
+      <div
+        class="container d-flex align-items-center justify-content-lg-between"
+      >
+        <h1 class="logo me-auto me-lg-0">
+          <a href="index.html"><img src="../static/assets/img/icon.png" /></a>
+        </h1>
+
+        <nav id="navbar" class="navbar order-last order-lg-0">
+          <ul>
+            <li>
+              <a class="nav-link scrollto active" href="index.html#hero"
+                >Home <i class="fa fa-home icon-white" aria-hidden="true"></i
+              ></a>
+            </li>
+            <li>
+              <a class="nav-link scrollto" href="index.html#about">About</a>
+            </li>
+            <li class="dropdown">
+              <a href="#"
+                ><span>Drop Down</span> <i class="bi bi-chevron-down"></i
+              ></a>
+              <ul>
+                <li><a href="index.html#text2sign">Text to Sign</a></li>
+                <li><a href="index.html#sign2text">Sign to Text</a></li>
+              </ul>
+            </li>
+            <li>
+              <a class="nav-link scrollto" href="index.html#cta">Stats</a>
+            </li>
+            <li>
+              <a class="nav-link scrollto" href="index.html#team">Team</a>
+            </li>
+
+            <li>
+              <a class="nav-link scrollto" href="index.html#contact">Contact</a>
+            </li>
+          </ul>
+          <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav>
+        <!-- .navbar -->
+
+        <a href="login.html" class="get-started-btn scrollto">Login</a>
+      </div>
+    </header>
+    <!-- End Header -->
+
+    <section id="services" class="services">
+      <div class="container aos-init aos-animate" data-aos="fade-up">
+        <div class="section-title">
+          <center>
+            <p style="padding-top: 6rem">Raised Concerns</p>
+            <em>Please act on the concerns quickly...</em>
+          </center>
+        </div>
+
+        <div class="row">
+          <div
+            class="
+              col-lg-4 col-md-6
+              d-flex
+              align-items-stretch
+              aos-init aos-animate
+            "
+            data-aos="zoom-in"
+            data-aos-delay="100"
+          >
+            {% for i in rows %}
+            <div class="icon-box">
+              <div class="icon"><i class="bx bxl-dribbble"></i></div>
+              <h4><a href=""> {{ i[0] }}</a></h4>
+              <div class="row">
+                <div class="col-12">
+                  <form action="/uploadvideo/{{i[0]}}" method="post" enctype="multipart/form-data">
+                    <input type="file" class="btn get-started-btn" style="color: black" name = "f1" id="f1">
+                  </input>
+                  <button class="btn get-started-btn" style="color: black" type="submit">
+                    Upload
+                  </button>
+                  </form>
+                </div>
+                <div class="offset-3 col-6">
+                  <form action="">
+                    <button class="btn get-started-btn" style="color: black">
+                      Delete
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
+      <div class="footer-top">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-3 col-md-6">
+              <div class="footer-info">
+                <h3>ISL Buddy<span>.</span></h3>
+                <p>
+                  Upper Indira Nagar<br />
+                  Bibwewadi, Pune<br />
+                  Maharashtra 411037 <br /><br />
+                  <strong>Phone:</strong> +1 5589 55488 55<br />
+                  <strong>Email:</strong> info@example.com<br />
+                </p>
+                <div class="social-links mt-3">
+                  <a href="#" class="google-plus"
+                    ><i class="bx bxl-github"></i
+                  ></a>
+                  <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+                  <a href="#" class="facebook"
+                    ><i class="bx bxl-facebook"></i
+                  ></a>
+                  <a href="#" class="instagram"
+                    ><i class="bx bxl-instagram"></i
+                  ></a>
+
+                  <a href="#" class="linkedin"
+                    ><i class="bx bxl-linkedin"></i
+                  ></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-2 col-md-6 footer-links">
+              <h4>Useful Links</h4>
+              <ul>
+                <li>
+                  <i class="bx bx-chevron-right"></i> <a href="#">Home</a>
+                </li>
+                <li>
+                  <i class="bx bx-chevron-right"></i>
+                  <a href="#about">About us</a>
+                </li>
+                <li>
+                  <i class="bx bx-chevron-right"></i>
+                  <a href="#text2sign">Text to Sign </a>
+                </li>
+                <li>
+                  <i class="bx bx-chevron-right"></i>
+                  <a href="#sign2text">Sign to Text</a>
+                </li>
+                <li>
+                  <i class="bx bx-chevron-right"></i>
+                  <a href="#team">Teams</a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="col-lg-7">
+              <img src="../static/assets/img/icon.png" class="img-fluid" />
+
+              <div class="copyright" style="align-items: center">
+                &copy; Copyright <strong><span>ISL Buddy</span></strong
+                >. All Rights Reserved
+              </div>
+              <div class="credits">Designed by <a href="">MBSK</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- End Footer -->
+  </body>
+</html>

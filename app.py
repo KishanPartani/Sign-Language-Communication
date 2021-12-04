@@ -4,12 +4,16 @@ from flask_cors import CORS, cross_origin
 from flask_bcrypt import Bcrypt
 from Helpers import text2gest as tg
 #from Helpers import gest2text as gt
+from Helpers import cartoonize as ct
+import intervention as it
 import os
 import sys
 from nltk.stem import WordNetLemmatizer
 import cv2
 import webbrowser
 from tensorflow import keras
+from csv import writer
+import csv
 
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
@@ -72,6 +76,7 @@ def text_gest():
     text = word_Lemmatized.lemmatize(text)
     ls = tg.datalist()
     print(ls)
+    """
     if(text == 'Bye'):
         print('Good Bye !!')
         exit
@@ -80,14 +85,70 @@ def text_gest():
         #cap = cv2.VideoCapture('static/dataset/'+ text + '.mp4')
         video = '../static/cartdata/cart'+text+'.mp4'
     #Human Intervention Part
+
     else:
-        print("Sorry, currently we don't have the word in our back end !")
+        print("Sorry, currently we don't have the word in our back end !")"""
+    word = it.similarWords(text)
+
+    if(len(word) != 0):
+        video = '../static/cartdata/cart'+word[0]+'.mp4'
+        return render_template('index.html', video=video)
+    else:
+        with open('data.csv', 'a') as fp:
+            writer_object = writer(fp)
+            lt = []
+            lt.append(text)
+            writer_object.writerow(lt)
+            fp.close()
+        return render_template('index.html')
     #return Response(tg.gen_frames(cap), mimetype='multipart/x-mixed-replace; boundary=frame')
-    return render_template('index.html', video=video, alert='working')
 
 """@app.route("/gest_text", methods=['GET', 'POST'])
 def gest_text():
     model = gt.model"""
+
+@app.route("/inter", methods=['GET', 'POST'])
+def inter():
+    #if email not in session:
+     #   return render_template('login.html')
+    rows = []
+    with open('data.csv', 'r') as fp:
+        csvreader = csv.reader(fp)
+        for row in csvreader:
+            rows.append(row)
+    print(rows)
+    return render_template('human-intervention.html', rows = rows)
+
+@app.route("/uploadvideo/<file_name>", methods=['GET', 'POST'])
+def download(file_name):
+    rows = []
+    print('debuggggg')
+    print(file_name)
+    temp = []
+    temp.append(file_name)
+    with open('data.csv', 'r') as fp:
+        csvreader = csv.reader(fp)
+        for row in csvreader:
+            rows.append(row)
+    print(rows)
+    rows.remove(temp)
+    with open('data.csv', 'w', newline='') as fw:
+        writerobj = writer(fw)
+        writerobj.writerows(rows)
+        fw.close()
+    if(request.method == 'POST'):
+        file = request.files['f1']
+        file.save("./static/newdata/"+ str(file_name)+ ".mp4")
+    inf = str(file_name) + '.mp4'
+    outf = 'cart'+ str(file_name) + '.mp4'
+    print("debugggggggggggg" ,outf)
+    ct.cartoonize(inf, outf, 0, 10)
+    return redirect('/inter')
+
+
+@app.route("/intervention", methods=['GET', 'POST'])
+def human_intervention():
+    return
 
 if __name__ == "__main__":
     print('Server Started !!')
