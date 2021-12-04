@@ -225,29 +225,32 @@
       <section id="text2sign" style="padding-top: 80px" class="features">
         <div class="container" data-aos="fade-up">
           <div class="row zoom" style="background-color: #ebe7e4">
-            <div
-              class="image col-lg-6"
-              style="background-image: url('../static/assets/img/3.jpg')"
-              data-aos="fade-right"
-            ></div>
-            <!-- <div class="col-lg-6">
+          
+            {% if video %}
+            <h3>{{alert}}</h3>
+            <div class="col-lg-6">
               <video
                 width="100%"
-                src="assets/Afghanistan.mp4"
+                src={{video}}
                 type="video/mp4"
                 controls
               ></video>
-            </div> -->
-            {% if video %}
-            <div class="col-lg-6">
+            </div> 
+            <!--<div class="col-lg-6">
                 <video
                   width="100%"
                   src={{video}}
                   type="video/mp4"
                   controls
                 ></video>
-            </div>
+            </div>-->
             {% else %}
+            <div
+              class="image col-lg-6"
+              style="background-image: url('../static/assets/img/3.jpg')"
+              data-aos="fade-right"
+            ></div>
+            {% endif %}
             <div
               class="
                 col-lg-6
@@ -298,7 +301,6 @@
                 <button class="btn search-btn mt-3">Raise a concern</button>
               </form>
             </div>
-            {% endif %}
           </div>
         </div>
       </section>
