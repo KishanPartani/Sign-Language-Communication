@@ -88,9 +88,6 @@ def text_gest():
 """@app.route("/gest_text", methods=['GET', 'POST'])
 def gest_text():
     model = gt.model"""
-    
-
-
 
 if __name__ == "__main__":
     print('Server Started !!')

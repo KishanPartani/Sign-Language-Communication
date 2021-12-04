@@ -24,7 +24,7 @@ def cartoonize(video_in, video_out, start_sec=0, end_sec=10):
     out_h = max_y - min_y
     out_w = max_x - min_x
 
-    writer = cv2.VideoWriter('./static/cartdata/'+video_out, cv2.VideoWriter_fourcc(*'MP4V'), SPEEDUP*fps, (out_w, out_h))
+    writer = cv2.VideoWriter('./static/cartdata/'+video_out, cv2.VideoWriter_fourcc(*'WEBM'), SPEEDUP*fps, (out_w, out_h))
     
     for i in tqdm(range(length)):
         ret, img = cap.read()
@@ -55,3 +55,6 @@ if __name__ == '__main__':
         video_in = i + '.mp4'
         video_out = 'cart'+ i + '.mp4'
         cartoonize(video_in, video_out, 0, 10)
+    """video_in = 'Africa.mp4'
+    video_out = 'cartAfrica.mp4'
+    cartoonize(video_in, video_out, 0, 10)"""
