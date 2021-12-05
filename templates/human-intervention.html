@@ -112,7 +112,9 @@
             <em>Please act on the concerns quickly...</em>
           </center>
         </div>
-
+        {% if alert  %}
+        <h3>{{alert}}</h3>
+        {% endif %}
         <div class="row">
           <div
             class="
@@ -139,8 +141,8 @@
                   </form>
                 </div>
                 <div class="offset-3 col-6">
-                  <form action="">
-                    <button class="btn get-started-btn" style="color: black">
+                  <form action="/deleteconc/{{i[0]}}">
+                    <button class="btn get-started-btn" style="color: black" type="submit">
                       Delete
                     </button>
                   </form>

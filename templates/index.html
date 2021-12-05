@@ -227,12 +227,13 @@
           <div class="row zoom" style="background-color: #ebe7e4">
           
             {% if video %}
-            <div class="col-lg-6">
+            <div class="col-lg-6 image">
               <video
                 width="100%"
                 src={{video}}
                 type="video/mp4"
                 controls
+                id="vid"
               ></video>
             </div> 
             <!--<div class="col-lg-6">
@@ -681,5 +682,12 @@
 
     <!-- Template Main JS File -->
     <script src="../static/assets/js/main.js"></script>
+    <script>
+      var video = document.querySelector("#vid");
+      video.addEventListener("ended", function () {
+        video.parentNode.style.backgroundImage = "url('../static/assets/img/3.jpg')";
+        video.remove();
+      });
+    </script>
   </body>
 </html>

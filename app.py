@@ -15,6 +15,9 @@ from tensorflow import keras
 from csv import writer
 import csv
 
+global flag
+flag = 0
+
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
 client = MongoClient('localhost', 27017)
@@ -46,7 +49,7 @@ def login():
         # create session variable with email
         session['email'] = user_cred['email']
         print(session['email'])
-        return render_template('index.html', email=session['email'])
+        return render_template('human-intervention.html', email=session['email'])
     else:
         return render_template('login.html', message="Incorrect password!", classm="alert alert-danger")
 
@@ -109,28 +112,37 @@ def gest_text():
 
 @app.route("/inter", methods=['GET', 'POST'])
 def inter():
-    #if email not in session:
-     #   return render_template('login.html')
+    global flag
+    if 'email' not in session:
+        return render_template('login.html')
     rows = []
     with open('data.csv', 'r') as fp:
         csvreader = csv.reader(fp)
         for row in csvreader:
             rows.append(row)
-    print(rows)
-    return render_template('human-intervention.html', rows = rows)
+    #print(rows)
+    if flag == 1:
+        flag = 0
+        return render_template('human-intervention.html', rows = rows, alert='Video Uploaded Successfully !')
+    elif flag == 2:
+        flag = 0
+        return render_template('human-intervention.html', rows = rows, alert='Concern Deleted Successfully !')
+    else:
+        return render_template('human-intervention.html', rows = rows)
 
 @app.route("/uploadvideo/<file_name>", methods=['GET', 'POST'])
 def download(file_name):
+    global flag
     rows = []
-    print('debuggggg')
-    print(file_name)
+    #print('debuggggg')
+    #print(file_name)
     temp = []
     temp.append(file_name)
     with open('data.csv', 'r') as fp:
         csvreader = csv.reader(fp)
         for row in csvreader:
             rows.append(row)
-    print(rows)
+    #print(rows)
     rows.remove(temp)
     with open('data.csv', 'w', newline='') as fw:
         writerobj = writer(fw)
@@ -141,10 +153,28 @@ def download(file_name):
         file.save("./static/newdata/"+ str(file_name)+ ".mp4")
     inf = str(file_name) + '.mp4'
     outf = 'cart'+ str(file_name) + '.mp4'
-    print("debugggggggggggg" ,outf)
+    #print("debugggggggggggg" ,outf)
     ct.cartoonize(inf, outf, 0, 10)
+    flag = 1
     return redirect('/inter')
 
+@app.route("/deleteconc/<file_name>", methods=['GET', 'POST'])
+def delete_concern(file_name):
+    global flag
+    rows = []
+    temp = []
+    temp.append(file_name)
+    with open('data.csv', 'r') as fp:
+        csvreader = csv.reader(fp)
+        for row in csvreader:
+            rows.append(row)
+    rows.remove(temp)
+    with open('data.csv', 'w', newline='') as fw:
+        writerobj = writer(fw)
+        writerobj.writerows(rows)
+        fw.close()
+    flag = 2
+    return redirect('/inter')
 
 @app.route("/intervention", methods=['GET', 'POST'])
 def human_intervention():

@@ -7,12 +7,11 @@ import os
 SPEEDUP = 0.75
 
 def cartoonize(video_in, video_out, start_sec=0, end_sec=10):
-    cap = cv2.VideoCapture('../static/newdata/'+ video_in)
+    print(video_in)
+    cap = cv2.VideoCapture('./static/newdata/'+ video_in)
     w, h = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH)),int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
     fps = float(cap.get(cv2.CAP_PROP_FPS))
     length = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
-    
-
     start_frame, end_frame = start_sec*fps, end_sec*fps
 
     #min_y,max_y = int(h/4), h
@@ -23,8 +22,7 @@ def cartoonize(video_in, video_out, start_sec=0, end_sec=10):
     out_h = max_y - min_y
     out_w = max_x - min_x
 
-    writer = cv2.VideoWriter('../static/cartdata/'+video_out, cv2.VideoWriter_fourcc(*'WEBM'), SPEEDUP*fps, (out_w, out_h))
-    
+    writer = cv2.VideoWriter('./static/cartdata/'+video_out, cv2.VideoWriter_fourcc(*'WEBM'), SPEEDUP*fps, (out_w, out_h))
     for i in tqdm(range(length)):
         ret, img = cap.read()
     
@@ -36,7 +34,6 @@ def cartoonize(video_in, video_out, start_sec=0, end_sec=10):
             color = cv2.bilateralFilter(img, 5, 5, 7)
             cartoon = cv2.bitwise_and(color, color, mask=edges)
             writer.write(cartoon)
-    
     writer.release()
     cap.release()
 
@@ -55,6 +52,6 @@ if __name__ == '__main__':
         video_in = i + '.mp4'
         video_out = 'cart'+ i + '.mp4'
         cartoonize(video_in, video_out, 0, 10)
-    video_in = 'Africa.mp4'
-    video_out = 'cartAfrica.mp4'
+    video_in = 'Teach.mp4'
+    video_out = 'cartTeach.mp4'
     cartoonize(video_in, video_out, 0, 10)"""
