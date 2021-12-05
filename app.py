@@ -15,7 +15,7 @@ from tensorflow import keras
 from csv import writer
 import csv
 
-global flag
+global flag, text
 flag = 0
 
 app = Flask(__name__)
@@ -71,6 +71,7 @@ def signup():
 
 @app.route("/text_gest", methods=['GET', 'POST'])
 def text_gest():
+    global text
     text = request.form['text']
     print(text)
     text = text.title()
@@ -79,31 +80,19 @@ def text_gest():
     text = word_Lemmatized.lemmatize(text)
     ls = tg.datalist()
     print(ls)
-    """
-    if(text == 'Bye'):
-        print('Good Bye !!')
-        exit
-    elif(text in ls):
-        print('debug')
-        #cap = cv2.VideoCapture('static/dataset/'+ text + '.mp4')
-        video = '../static/cartdata/cart'+text+'.mp4'
-    #Human Intervention Part
-
-    else:
-        print("Sorry, currently we don't have the word in our back end !")"""
     word = it.similarWords(text)
 
     if(len(word) != 0):
         video = '../static/cartdata/cart'+word[0]+'.mp4'
         return render_template('index.html', video=video)
     else:
-        with open('data.csv', 'a') as fp:
+        with open('data.csv', 'a', newline='') as fp:
             writer_object = writer(fp)
             lt = []
             lt.append(text)
             writer_object.writerow(lt)
             fp.close()
-        return render_template('index.html')
+        return render_template('index.html', alertt = 'Video not Found !')
     #return Response(tg.gen_frames(cap), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 """@app.route("/gest_text", methods=['GET', 'POST'])
@@ -123,10 +112,10 @@ def inter():
     #print(rows)
     if flag == 1:
         flag = 0
-        return render_template('human-intervention.html', rows = rows, alert='Video Uploaded Successfully !')
+        return render_template('human-intervention.html', rows = rows, alertt='Video Uploaded Successfully !')
     elif flag == 2:
         flag = 0
-        return render_template('human-intervention.html', rows = rows, alert='Concern Deleted Successfully !')
+        return render_template('human-intervention.html', rows = rows, alertt='Concern Deleted Successfully !')
     else:
         return render_template('human-intervention.html', rows = rows)
 
@@ -176,9 +165,19 @@ def delete_concern(file_name):
     flag = 2
     return redirect('/inter')
 
-@app.route("/intervention", methods=['GET', 'POST'])
+@app.route("/raiseconc", methods=['GET', 'POST'])
 def human_intervention():
-    return
+    text = request.form['text']
+    #print(text)
+    if(text == ''):
+        return render_template('index.html', alertt = 'Please enter a word...')
+    with open('data.csv', 'a', newline='') as fp:
+        writer_object = writer(fp)
+        lt = []
+        lt.append(text)
+        writer_object.writerow(lt)
+        fp.close()
+    return render_template('index.html', alertt = 'Concern raised successfully !')
 
 if __name__ == "__main__":
     print('Server Started !!')

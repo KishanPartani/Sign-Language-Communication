@@ -112,8 +112,14 @@
             <em>Please act on the concerns quickly...</em>
           </center>
         </div>
-        {% if alert  %}
-        <h3>{{alert}}</h3>
+        {% if alertt  %}
+        <script>
+            var str = '{{alertt}}';
+            //alert(str);
+            setTimeout(function () {
+              alert(str);
+          }, 1000);
+        </script>
         {% endif %}
         <div class="row">
           <div

@@ -273,6 +273,15 @@
               >
                 Text to Sign Conversion
               </h2>
+              {% if alertt  %}
+              <script>
+                  var str = '{{alertt}}';
+                  //alert(str);
+                  setTimeout(function () {
+                    alert(str);
+                }, 1000);
+              </script>
+              {% endif %}
               <form name="f1" action="/text_gest" method="post">
                 <!-- <div class="form-group">
                   <input placeholder="Enter a word to be Searched" style="width: 300px;" class="form-control" id="word" type="text"/>
@@ -298,8 +307,12 @@
                 <button class="btn search-btn mt-3" type="submit">
                   Search
                 </button>
-                <button class="btn search-btn mt-3">Raise a concern</button>
+                <button class="btn search-btn mt-3" onclick="this.form.action = '/raiseconc'">Raise a concern</button>
               </form>
+              <!--<form action="/raiseconc" method="post">
+                <button class="btn search-btn mt-3" type="submit">Raise a concern</button>
+              </form>-->
+      
             </div>
           </div>
         </div>
