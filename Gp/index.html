@@ -224,19 +224,21 @@
       <section id="text2sign" style="padding-top: 80px" class="features">
         <div class="container" data-aos="fade-up">
           <div class="row zoom" style="background-color: #ebe7e4">
-            <div
+            <!-- <div
               class="image col-lg-6"
               style="background-image: url('assets/img/3.jpg')"
               data-aos="fade-right"
-            ></div>
-            <!-- <div class="col-lg-6">
+            >
+            </div> -->
+            <div class="image col-lg-6">
               <video
+                id="vid"
                 width="100%"
                 src="assets/Afghanistan.mp4"
                 type="video/mp4"
                 controls
               ></video>
-            </div> -->
+            </div>
 
             <div
               class="
@@ -666,6 +668,14 @@
     <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
     <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
     <script src="assets/vendor/php-email-form/validate.js"></script>
+
+    <script>
+      var video = document.querySelector("video");
+      video.addEventListener("ended", function () {
+        video.parentNode.style.backgroundImage = "url('assets/img/3.jpg')";
+        video.remove();
+      });
+    </script>
 
     <!-- Template Main JS File -->
     <script src="assets/js/main.js"></script>
