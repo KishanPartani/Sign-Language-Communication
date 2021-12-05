@@ -345,11 +345,12 @@
               >
                 Sign to Text Conversion
               </h3>
-              <form>
-                <button class="btn get-started-btn upload-btn" type="submit ">
+              <form action="/gest_text_upload" method="post" enctype="multipart/form-data">
+                <input type="file" class="btn get-started-btn" style="color: black" name = "f2" id="f2">
+                <button class="btn get-started-btn upload-btn" type="submit">
                   <strong> Upload </strong>
                 </button>
-                <button class="btn get-started-btn upload-btn" type="submit">
+                <button class="btn get-started-btn upload-btn">
                   <strong> Start Webcam </strong>
                 </button>
               </form>

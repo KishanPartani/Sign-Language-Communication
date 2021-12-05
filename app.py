@@ -3,7 +3,7 @@ from flask import Flask, render_template, url_for, request, flash, redirect, jso
 from flask_cors import CORS, cross_origin
 from flask_bcrypt import Bcrypt
 from Helpers import text2gest as tg
-#from Helpers import gest2text as gt
+from Helpers import gest2text as gt
 from Helpers import cartoonize as ct
 import intervention as it
 import os
@@ -178,6 +178,15 @@ def human_intervention():
         writer_object.writerow(lt)
         fp.close()
     return render_template('index.html', alertt = 'Concern raised successfully !')
+
+@app.route("/gest_text_upload", methods=['GET', 'POST'])
+def gest_text_upload():
+    file = request.files['f2']
+    file.save("./static/uploaded/video.mp4")
+    gt.convert()
+    os.remove("./static/uploaded/video.mp4")
+    return render_template('index.html')
+
 
 if __name__ == "__main__":
     print('Server Started !!')
