@@ -48,7 +48,7 @@ def prob_viz(res, actions, input_frame, colors):
     output_frame = input_frame.copy()
     return output_frame
 
-def convert():
+def convert(flag):
     ls = ['Afghanistan', 'Africa (sign 1)', 'Africa (sign 2)', 'Antarctica', 'Argentina', 'Armenia', 'Cambodia', 'Canada', 'Chile', 'China', 'Costa Rica', 'Croatia', 'Cyprus', 'Czech Republic', 'Denmark', 'Egypt (sign 1)', 'Egypt (sign 2)', 'El Salvador', 'England (sign 1)', 'Kazakhstan', 'Kenya', 'Korea', 'Kuwait', 'Maharashtra', 'Mali']
     #print(ls)
     actions = np.array(ls)
@@ -64,7 +64,11 @@ def convert():
     print('debug')
     #frameRate = cap.get(5)
     #ISL Continents and Countries/Mali.mp4
-    cap = cv2.VideoCapture('./static/uploaded/video.mp4')
+    if(flag):
+        cap = cv2.VideoCapture('./static/uploaded/video.mp4')
+    else:
+        cap = cv2.VideoCapture(0)
+    
     with mp_holistic.Holistic(min_detection_confidence=0.5, min_tracking_confidence=0.5) as holistic:
         while cap.isOpened():
             ret, frame = cap.read()

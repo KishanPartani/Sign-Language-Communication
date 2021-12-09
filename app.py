@@ -183,10 +183,14 @@ def human_intervention():
 def gest_text_upload():
     file = request.files['f2']
     file.save("./static/uploaded/video.mp4")
-    gt.convert()
+    gt.convert(1)
     os.remove("./static/uploaded/video.mp4")
     return render_template('index.html')
 
+@app.route("/gest_text_cam", methods=['GET', 'POST'])
+def gest_text_cam():
+    gt.convert(0)
+    return render_template('index.html')
 
 if __name__ == "__main__":
     print('Server Started !!')
