@@ -10,7 +10,10 @@
 
     <!-- Favicons -->
     <link href="../static/assets/img/favicon.PNG" rel="icon" />
-    <link href="../static/assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
+    <link
+      href="../static/assets/img/apple-touch-icon.png"
+      rel="apple-touch-icon"
+    />
 
     <!-- Google Fonts -->
     <link
@@ -28,13 +31,22 @@
       href="../static/assets/vendor/bootstrap-icons/bootstrap-icons.css"
       rel="stylesheet"
     />
-    <link href="../static/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+    <link
+      href="../static/assets/vendor/boxicons/css/boxicons.min.css"
+      rel="stylesheet"
+    />
     <link
       href="../static/assets/vendor/glightbox/css/glightbox.min.css"
       rel="stylesheet"
     />
-    <link href="../static/assets/vendor/remixicon/remixicon.css" rel="stylesheet" />
-    <link href="../static/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
+    <link
+      href="../static/assets/vendor/remixicon/remixicon.css"
+      rel="stylesheet"
+    />
+    <link
+      href="../static/assets/vendor/swiper/swiper-bundle.min.css"
+      rel="stylesheet"
+    />
     <link
       rel="stylesheet"
       href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
@@ -59,13 +71,13 @@
         class="container d-flex align-items-center justify-content-lg-between"
       >
         <h1 class="logo me-auto me-lg-0">
-          <a href="index.html"><img src="../static/assets/img/icon.png" /></a>
+          <a href="/"><img src="../static/assets/img/icon.png" /></a>
         </h1>
 
         <nav id="navbar" class="navbar order-last order-lg-0">
           <ul>
             <li>
-              <a class="nav-link scrollto active" href="#hero"
+              <a class="nav-link scrollto active" href="/"
                 >Home <i class="fa fa-home icon-white" aria-hidden="true"></i
               ></a>
             </li>
@@ -196,24 +208,12 @@
         <div class="container" data-aos="zoom-in">
           <div class="clients-slider swiper">
             <div class="swiper-wrapper align-items-center">
+              {% for i in letters_img %}
+
               <div class="swiper-slide">
-                <img src="../static/assets/img/letters/a.jpg" class="img-fluid" alt="" />
+                <img src="{{i}}" class="img-fluid" alt="" />
               </div>
-              <div class="swiper-slide">
-                <img src="../static/assets/img/letters/b.jpg" class="img-fluid" alt="" />
-              </div>
-              <div class="swiper-slide">
-                <img src="../static/assets/img/letters/c.jpg" class="img-fluid" alt="" />
-              </div>
-              <div class="swiper-slide">
-                <img src="../static/assets/img/letters/d.jpg" class="img-fluid" alt="" />
-              </div>
-              <div class="swiper-slide">
-                <img src="../static/assets/img/letters/e.jpg" class="img-fluid" alt="" />
-              </div>
-              <div class="swiper-slide">
-                <img src="../static/assets/img/letters/f.jpg" class="img-fluid" alt="" />
-              </div>
+              {% endfor %}
             </div>
             <div class="swiper-pagination"></div>
           </div>
@@ -225,17 +225,16 @@
       <section id="text2sign" style="padding-top: 80px" class="features">
         <div class="container" data-aos="fade-up">
           <div class="row zoom" style="background-color: #ebe7e4">
-          
             {% if video %}
-            <div class="col-lg-6 image">
+            <div class="col-lg-6 image p-0">
               <video
                 width="100%"
-                src={{video}}
+                src="{{video}}"
                 type="video/mp4"
                 controls
                 id="vid"
               ></video>
-            </div> 
+            </div>
             <!--<div class="col-lg-6">
                 <video
                   width="100%"
@@ -273,12 +272,12 @@
               >
                 Text to Sign Conversion
               </h2>
-              {% if alertt  %}
+              {% if alertt %}
               <script>
-                  var str = '{{alertt}}';
-                  //alert(str);
-                  setTimeout(function () {
-                    alert(str);
+                var str = "{{alertt}}";
+                //alert(str);
+                setTimeout(function () {
+                  alert(str);
                 }, 1000);
               </script>
               {% endif %}
@@ -307,12 +306,16 @@
                 <button class="btn search-btn mt-3" type="submit">
                   Search
                 </button>
-                <button class="btn search-btn mt-3" onclick="this.form.action = '/raiseconc'">Raise a concern</button>
+                <button
+                  class="btn search-btn mt-3"
+                  onclick="this.form.action = '/raiseconc'"
+                >
+                  Raise a concern
+                </button>
               </form>
               <!--<form action="/raiseconc" method="post">
                 <button class="btn search-btn mt-3" type="submit">Raise a concern</button>
               </form>-->
-      
             </div>
           </div>
         </div>
@@ -341,18 +344,48 @@
             >
               <h3
                 class="text-white pb-4"
-                style="margin-top: 150px; font-family: 'Kanit', sans-serif"
+                style="margin-top: 100px; font-family: 'Kanit', sans-serif"
               >
                 Sign to Text Conversion
               </h3>
-              <form action="/gest_text_upload" method="post" enctype="multipart/form-data">
-                <input type="file" class="btn get-started-btn" style="color: black" name = "f2" id="f2">
-                <button class="btn get-started-btn upload-btn" type="submit">
-                  <strong> Upload </strong>
-                </button>
-                <button class="btn get-started-btn upload-btn" onclick="this.form.action = '/gest_text_cam'">
-                  <strong> Start Webcam </strong>
-                </button>
+              <form
+                action="/gest_text_upload"
+                method="post"
+                enctype="multipart/form-data"
+              >
+                <div class="row mb-3">
+                  <div class="col-2"></div>
+                  <div class="col-8">
+                    <input
+                      type="file"
+                      class="btn get-started-btn"
+                      name="f2"
+                      id="f2"
+                      style="padding-right: 115px"
+                    />
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-3"></div>
+                  <div class="col-3">
+                    <button
+                      style="width: 150px"
+                      class="btn get-started-btn"
+                      type="submit"
+                    >
+                      <strong> Upload </strong>
+                    </button>
+                  </div>
+                  <div class="col-3">
+                    <button
+                      style="width: 150px"
+                      class="btn get-started-btn"
+                      onclick="this.form.action = '/gest_text_cam'"
+                    >
+                      <strong> Start Webcam </strong>
+                    </button>
+                  </div>
+                </div>
               </form>
               <br />
               <blockquote class="blockquote pt-2">
@@ -699,7 +732,8 @@
     <script>
       var video = document.querySelector("#vid");
       video.addEventListener("ended", function () {
-        video.parentNode.style.backgroundImage = "url('../static/assets/img/3.jpg')";
+        video.parentNode.style.backgroundImage =
+          "url('../static/assets/img/3.jpg')";
         video.remove();
       });
     </script>

@@ -30,7 +30,9 @@ app.config['SECRET_KEY'] = '14ec258c169f5c19f78385bcc83a51df7444624b2ff90449b4a9
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    global letters_img
+    # print(letters_img)
+    return render_template('index.html',letters_img=letters_img)
 
 @app.route('/login-page')
 def show_login_page():
@@ -50,7 +52,7 @@ def login():
         session['email'] = user_cred['email']
         print(session['email'])
         return render_template('human-intervention.html', email=session['email'])
-    else:
+    else:     
         return render_template('login.html', message="Incorrect password!", classm="alert alert-danger")
 
 
@@ -193,5 +195,11 @@ def gest_text_cam():
     return render_template('index.html')
 
 if __name__ == "__main__":
+    global letters_img
+    letters_img = []
+    for i in "abcdefghijklmnopqrstuvwxyz":
+        url = "../static/assets/img/letters/" + i + ".jpg"
+        letters_img.append(url)
+    
     print('Server Started !!')
     app.run(debug=True, use_reloader=False)

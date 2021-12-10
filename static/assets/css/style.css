@@ -162,7 +162,7 @@ h6 {
 }
 
 .upload-btn{
-  width: 200px;
+  width: 150px;
 }
 .search-btn{
   width: 150px;
@@ -615,7 +615,7 @@ section {
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
-  min-height: 400px;
+  min-height: 370px;
 }
 
 /*--------------------------------------------------------------
