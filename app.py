@@ -206,6 +206,8 @@ def gest_text_cam():
 
 @app.route("/logout")
 def logout():
+    if 'email' not in session:
+        return render_template('index.html')
     session.pop('email')
     return render_template("index.html")
 
