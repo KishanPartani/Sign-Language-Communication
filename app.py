@@ -15,7 +15,7 @@ from tensorflow import keras
 from csv import writer
 import csv
 
-global flag, text
+global flag, text, check
 flag = 0
 
 app = Flask(__name__)
@@ -40,6 +40,13 @@ def show_login_page():
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
+    global check
+    check = 0
+    rows = []
+    with open('data.csv', 'r') as fp:
+        csvreader = csv.reader(fp)
+        for row in csvreader:
+            rows.append(row)
     print(request.form['user'])
     print(request.form['pwd'])
     user_cred = majusers.find_one({'user': request.form['user']}, {
@@ -51,8 +58,9 @@ def login():
         # create session variable with email
         session['email'] = user_cred['email']
         print(session['email'])
-        return render_template('human-intervention.html', email=session['email'])
-    else:     
+        return render_template('human-intervention.html', rows = rows, check=1, email=session['email'])
+    else: 
+        check = 0    
         return render_template('login.html', message="Incorrect password!", classm="alert alert-danger")
 
 
@@ -103,9 +111,11 @@ def gest_text():
 
 @app.route("/inter", methods=['GET', 'POST'])
 def inter():
-    global flag
+    global flag, check
     if 'email' not in session:
+        check = 0
         return render_template('login.html')
+    print(session['email'])
     rows = []
     with open('data.csv', 'r') as fp:
         csvreader = csv.reader(fp)
@@ -114,12 +124,12 @@ def inter():
     #print(rows)
     if flag == 1:
         flag = 0
-        return render_template('human-intervention.html', rows = rows, alertt='Video Uploaded Successfully !')
+        return render_template('human-intervention.html', rows = rows, check=1, alertt='Video Uploaded Successfully !', email=session['email'])
     elif flag == 2:
         flag = 0
-        return render_template('human-intervention.html', rows = rows, alertt='Concern Deleted Successfully !')
+        return render_template('human-intervention.html', rows = rows, check=1, alertt='Concern Deleted Successfully !', email=session['email'])
     else:
-        return render_template('human-intervention.html', rows = rows)
+        return render_template('human-intervention.html', rows = rows, check=1, email=session['email'])
 
 @app.route("/uploadvideo/<file_name>", methods=['GET', 'POST'])
 def download(file_name):
@@ -193,6 +203,11 @@ def gest_text_upload():
 def gest_text_cam():
     gt.convert(0)
     return render_template('index.html')
+
+@app.route("/logout")
+def logout():
+    session.pop('email')
+    return render_template("index.html")
 
 if __name__ == "__main__":
     global letters_img

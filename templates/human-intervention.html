@@ -74,8 +74,11 @@
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav>
       <!-- .navbar -->
-
+      {% if check %}
+      <h5 style="color: antiquewhite;">Hello, {{email}}</h5>
+      {% else %}
       <a href="#" class="get-started-btn scrollto">Login</a>
+      {% endif %}
     </div>
   </header>
   <!-- End Header -->
