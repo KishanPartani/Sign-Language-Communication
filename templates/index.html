@@ -99,8 +99,11 @@
           <i class="bi bi-list mobile-nav-toggle"></i>
         </nav>
         <!-- .navbar -->
-
+        {% if check %}
+        <h5 style="color: antiquewhite;">Hello, {{email}}</h5><a href="/logout" class="get-started-btn scrollto">Logout</a>
+        {%else %}
         <a href="/login-page" class="get-started-btn scrollto">Login</a>
+        {% endif %}
         <!--<h5 style="color: #ebe7e4;">Hello, {{email}}</h5>-->
       </div>
     </header>

@@ -31,8 +31,13 @@ app.config['SECRET_KEY'] = '14ec258c169f5c19f78385bcc83a51df7444624b2ff90449b4a9
 @app.route('/')
 def index():
     global letters_img
+    if 'email' in session:
+        check = 1
+        return render_template('index.html',letters_img=letters_img, check=check, email = session['email'])
+    else:
+        check = 0
     # print(letters_img)
-    return render_template('index.html',letters_img=letters_img)
+        return render_template('index.html',letters_img=letters_img, check=check)
 
 @app.route('/login-page')
 def show_login_page():
@@ -81,7 +86,13 @@ def signup():
 
 @app.route("/text_gest", methods=['GET', 'POST'])
 def text_gest():
-    global text
+    global text, check
+    if 'email' in session:
+        check = 1
+        email = session['email']
+    else:
+        check = 0
+        email = ''
     text = request.form['text']
     print(text)
     text = text.title()
@@ -94,7 +105,7 @@ def text_gest():
 
     if(len(word) != 0):
         video = '../static/cartdata/cart'+word[0]+'.mp4'
-        return render_template('index.html', video=video)
+        return render_template('index.html', check=check, email=email, letters_img=letters_img, video=video)
     else:
         with open('data.csv', 'a', newline='') as fp:
             writer_object = writer(fp)
@@ -102,7 +113,7 @@ def text_gest():
             lt.append(text)
             writer_object.writerow(lt)
             fp.close()
-        return render_template('index.html', alertt = 'Video not Found !')
+        return render_template('index.html', check=check, email=email, letters_img=letters_img, alertt = 'Video not Found !')
     #return Response(tg.gen_frames(cap), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 """@app.route("/gest_text", methods=['GET', 'POST'])
@@ -179,37 +190,55 @@ def delete_concern(file_name):
 
 @app.route("/raiseconc", methods=['GET', 'POST'])
 def human_intervention():
+    if 'email' in session:
+        check = 1
+        email = session['email']
+    else:
+        check = 0
+        email = ''
     text = request.form['text']
     #print(text)
     if(text == ''):
-        return render_template('index.html', alertt = 'Please enter a word...')
+        return render_template('index.html',  email=email, letters_img=letters_img, alertt = 'Please enter a word...')
     with open('data.csv', 'a', newline='') as fp:
         writer_object = writer(fp)
         lt = []
         lt.append(text)
         writer_object.writerow(lt)
         fp.close()
-    return render_template('index.html', alertt = 'Concern raised successfully !')
+    return render_template('index.html',  email=email, check=check, letters_img=letters_img, alertt = 'Concern raised successfully !')
 
 @app.route("/gest_text_upload", methods=['GET', 'POST'])
 def gest_text_upload():
+    if 'email' in session:
+        check = 1
+        email = session['email']
+    else:
+        check = 0
+        email = ''
     file = request.files['f2']
     file.save("./static/uploaded/video.mp4")
     gt.convert(1)
     os.remove("./static/uploaded/video.mp4")
-    return render_template('index.html')
+    return render_template('index.html', email=email,  check= check, letters_img=letters_img)
 
 @app.route("/gest_text_cam", methods=['GET', 'POST'])
 def gest_text_cam():
+    if 'email' in session:
+        check = 1
+        email = session['email']
+    else:
+        check = 0
+        email = ''
     gt.convert(0)
-    return render_template('index.html')
+    return render_template('index.html',  email=email, check=check, letters_img=letters_img)
 
 @app.route("/logout")
 def logout():
     if 'email' not in session:
-        return render_template('index.html')
+        return render_template('index.html', check=0, letters_img=letters_img)
     session.pop('email')
-    return render_template("index.html")
+    return render_template("index.html", check=0, letters_img=letters_img)
 
 if __name__ == "__main__":
     global letters_img
