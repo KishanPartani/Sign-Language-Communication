@@ -8,7 +8,7 @@ SPEEDUP = 0.75
 
 def cartoonize(video_in, video_out, start_sec=0, end_sec=10):
     print(video_in)
-    cap = cv2.VideoCapture('./static/newdata/'+ video_in)
+    cap = cv2.VideoCapture('./static/dataset/'+ video_in)
     w, h = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH)),int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
     fps = float(cap.get(cv2.CAP_PROP_FPS))
     length = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))

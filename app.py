@@ -102,7 +102,7 @@ def text_gest():
     ls = tg.datalist()
     print(ls)
     word = it.similarWords(text)
-
+    print("word = ",word)
     if(len(word) != 0):
         video = '../static/cartdata/cart'+word[0]+'.mp4'
         return render_template('index.html', check=check, email=email, letters_img=letters_img, video=video)
@@ -162,7 +162,7 @@ def download(file_name):
         fw.close()
     if(request.method == 'POST'):
         file = request.files['f1']
-        file.save("./static/newdata/"+ str(file_name)+ ".mp4")
+        file.save("./static/dataset/"+ str(file_name)+ ".mp4")
     inf = str(file_name) + '.mp4'
     outf = 'cart'+ str(file_name) + '.mp4'
     #print("debugggggggggggg" ,outf)
@@ -197,6 +197,7 @@ def human_intervention():
         check = 0
         email = ''
     text = request.form['text']
+    text = text.title()
     #print(text)
     if(text == ''):
         return render_template('index.html',  email=email, letters_img=letters_img, alertt = 'Please enter a word...')

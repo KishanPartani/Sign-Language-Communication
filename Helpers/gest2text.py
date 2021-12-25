@@ -49,14 +49,8 @@ def prob_viz(res, actions, input_frame, colors):
     return output_frame
 
 def convert(flag):
-    ls = ['Afghanistan', 'Africa (sign 1)', 'Africa (sign 2)', 'Antarctica', 'Argentina', 'Armenia', 'Cambodia', 'Canada', 'Chile', 'China', 'Costa Rica', 'Croatia', 'Cyprus', 'Czech Republic', 'Denmark', 'Egypt (sign 1)', 'Egypt (sign 2)', 'El Salvador', 'England (sign 1)', 'Kazakhstan', 'Kenya', 'Korea', 'Kuwait', 'Maharashtra', 'Mali']
-    #print(ls)
-    actions = np.array(ls)
-    model = keras.models.load_model('./Signlang_Countries/midsem.h5')
-    model.load_weights('./Signlang_Countries/midsem.h5')
-    colors = []
-    for i in actions:
-        colors.append((245,117,16))
+    
+
     sequence = []
     sentence = []
     predictions = []
@@ -65,8 +59,25 @@ def convert(flag):
     #frameRate = cap.get(5)
     #ISL Continents and Countries/Mali.mp4
     if(flag):
+        ls = ['Afghanistan', 'Africa (sign 1)', 'Africa (sign 2)', 'Antarctica', 'Argentina', 'Armenia', 'Cambodia', 'Canada', 'Chile', 'China', 'Costa Rica', 'Croatia', 'Cyprus', 'Czech Republic', 'Denmark', 'Egypt (sign 1)', 'Egypt (sign 2)', 'El Salvador', 'England (sign 1)', 'Kazakhstan', 'Kenya', 'Korea', 'Kuwait', 'Maharashtra', 'Mali']
+    
+        #print(ls)
+        actions = np.array(ls)
+        model = keras.models.load_model('./Signlang_Countries/midsem.h5')
+        model.load_weights('./Signlang_Countries/midsem.h5')
+        colors = []
+        for i in actions:
+            colors.append((245,117,16))
         cap = cv2.VideoCapture('./static/uploaded/video.mp4')
     else:
+        ls = ['tea','teach','technology']
+        #print(ls)
+        actions = np.array(ls)
+        model = keras.models.load_model('./Signlang_Realtime/action.h5')
+        model.load_weights('./Signlang_Realtime/action.h5')
+        colors = []
+        for i in actions:
+            colors.append((245,117,16))
         cap = cv2.VideoCapture(0)
     
     with mp_holistic.Holistic(min_detection_confidence=0.5, min_tracking_confidence=0.5) as holistic:
