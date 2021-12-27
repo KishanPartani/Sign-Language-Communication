@@ -105,7 +105,7 @@ def text_gest():
     print("word = ",word)
     if(len(word) != 0):
         video = '../static/cartdata/cart'+word[0]+'.mp4'
-        return render_template('index.html', check=check, email=email, letters_img=letters_img, video=video)
+        return render_template('index.html', scroll='text2sign', check=check, email=email, letters_img=letters_img, video=video)
     else:
         with open('data.csv', 'a', newline='') as fp:
             writer_object = writer(fp)

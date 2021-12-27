@@ -65,6 +65,14 @@
   </head>
 
   <body>
+    {% if scroll %}
+    <script>
+      // document.getElementById("{{ scroll }}").scrollIntoView();
+      console.log("scroll called")
+      // or
+      document.location.hash = "#" + "{{ scroll }}";
+    </script>
+    {% endif %}
     <!-- ======= Header ======= -->
     <header id="header" class="fixed-top">
       <div
@@ -100,7 +108,8 @@
         </nav>
         <!-- .navbar -->
         {% if check %}
-        <h5 style="color: antiquewhite;">Hello, {{email}}</h5><a href="/logout" class="get-started-btn scrollto">Logout</a>
+        <h5 style="color: antiquewhite">Hello, {{email}}</h5>
+        <a href="/logout" class="get-started-btn scrollto">Logout</a>
         {%else %}
         <a href="/login-page" class="get-started-btn scrollto">Login</a>
         {% endif %}
