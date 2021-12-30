@@ -28,20 +28,23 @@ cors = CORS(app, resources={r"/foo": {"origins": "*"}})
 app.config['CORS_HEADERS'] = 'Content-Type'
 app.config['SECRET_KEY'] = '14ec258c169f5c19f78385bcc83a51df7444624b2ff90449b4a9832e6fe706a1'
 
+
 @app.route('/')
 def index():
     global letters_img
     if 'email' in session:
         check = 1
-        return render_template('index.html',letters_img=letters_img, check=check, email = session['email'])
+        return render_template('index.html', letters_img=letters_img, check=check, email=session['email'])
     else:
         check = 0
     # print(letters_img)
-        return render_template('index.html',letters_img=letters_img, check=check)
+        return render_template('index.html', letters_img=letters_img, check=check)
+
 
 @app.route('/login-page')
 def show_login_page():
     return render_template('login.html')
+
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
@@ -63,9 +66,9 @@ def login():
         # create session variable with email
         session['email'] = user_cred['email']
         print(session['email'])
-        return render_template('human-intervention.html', rows = rows, check=1, email=session['email'])
-    else: 
-        check = 0    
+        return render_template('human-intervention.html', rows=rows, check=1, email=session['email'])
+    else:
+        check = 0
         return render_template('login.html', message="Incorrect password!", classm="alert alert-danger")
 
 
@@ -81,8 +84,9 @@ def signup():
                     "password": password_hash}
     empr_id = db.majusers.insert_one(user_details).inserted_id
     print(empr_id)
-    
+
     return render_template('login.html', message="Sign up successful", classm="alert alert-success")
+
 
 @app.route("/text_gest", methods=['GET', 'POST'])
 def text_gest():
@@ -96,13 +100,13 @@ def text_gest():
     text = request.form['text']
     print(text)
     text = text.title()
-    #print(text)
+    # print(text)
     word_Lemmatized = WordNetLemmatizer()
     text = word_Lemmatized.lemmatize(text)
     ls = tg.datalist()
     print(ls)
     word = it.similarWords(text)
-    print("word = ",word)
+    print("word = ", word)
     if(len(word) != 0):
         video = '../static/cartdata/cart'+word[0]+'.mp4'
         return render_template('index.html', scroll='text2sign', check=check, email=email, letters_img=letters_img, video=video)
@@ -113,12 +117,14 @@ def text_gest():
             lt.append(text)
             writer_object.writerow(lt)
             fp.close()
-        return render_template('index.html', check=check, email=email, letters_img=letters_img, alertt = 'Video not Found !')
-    #return Response(tg.gen_frames(cap), mimetype='multipart/x-mixed-replace; boundary=frame')
+        return render_template('index.html', check=check, email=email, letters_img=letters_img, alertt='Video not Found !')
+    # return Response(tg.gen_frames(cap), mimetype='multipart/x-mixed-replace; boundary=frame')
+
 
 """@app.route("/gest_text", methods=['GET', 'POST'])
 def gest_text():
     model = gt.model"""
+
 
 @app.route("/inter", methods=['GET', 'POST'])
 def inter():
@@ -132,29 +138,30 @@ def inter():
         csvreader = csv.reader(fp)
         for row in csvreader:
             rows.append(row)
-    #print(rows)
+    # print(rows)
     if flag == 1:
         flag = 0
-        return render_template('human-intervention.html', rows = rows, check=1, alertt='Video Uploaded Successfully !', email=session['email'])
+        return render_template('human-intervention.html', rows=rows, check=1, alertt='Video Uploaded Successfully !', email=session['email'])
     elif flag == 2:
         flag = 0
-        return render_template('human-intervention.html', rows = rows, check=1, alertt='Concern Deleted Successfully !', email=session['email'])
+        return render_template('human-intervention.html', rows=rows, check=1, alertt='Concern Deleted Successfully !', email=session['email'])
     else:
-        return render_template('human-intervention.html', rows = rows, check=1, email=session['email'])
+        return render_template('human-intervention.html', rows=rows, check=1, email=session['email'])
+
 
 @app.route("/uploadvideo/<file_name>", methods=['GET', 'POST'])
 def download(file_name):
     global flag
     rows = []
-    #print('debuggggg')
-    #print(file_name)
+    # print('debuggggg')
+    # print(file_name)
     temp = []
     temp.append(file_name)
     with open('data.csv', 'r') as fp:
         csvreader = csv.reader(fp)
         for row in csvreader:
             rows.append(row)
-    #print(rows)
+    # print(rows)
     rows.remove(temp)
     with open('data.csv', 'w', newline='') as fw:
         writerobj = writer(fw)
@@ -162,13 +169,14 @@ def download(file_name):
         fw.close()
     if(request.method == 'POST'):
         file = request.files['f1']
-        file.save("./static/dataset/"+ str(file_name)+ ".mp4")
+        file.save("./static/dataset/" + str(file_name) + ".mp4")
     inf = str(file_name) + '.mp4'
-    outf = 'cart'+ str(file_name) + '.mp4'
+    outf = 'cart' + str(file_name) + '.mp4'
     #print("debugggggggggggg" ,outf)
     ct.cartoonize(inf, outf, 0, 10)
     flag = 1
     return redirect('/inter')
+
 
 @app.route("/deleteconc/<file_name>", methods=['GET', 'POST'])
 def delete_concern(file_name):
@@ -188,6 +196,7 @@ def delete_concern(file_name):
     flag = 2
     return redirect('/inter')
 
+
 @app.route("/raiseconc", methods=['GET', 'POST'])
 def human_intervention():
     if 'email' in session:
@@ -198,16 +207,22 @@ def human_intervention():
         email = ''
     text = request.form['text']
     text = text.title()
-    #print(text)
+    # print(text)
     if(text == ''):
-        return render_template('index.html',  email=email, letters_img=letters_img, alertt = 'Please enter a word...')
+        return render_template('index.html',  email=email, letters_img=letters_img, alertt='Please enter a word...')
     with open('data.csv', 'a', newline='') as fp:
         writer_object = writer(fp)
         lt = []
         lt.append(text)
         writer_object.writerow(lt)
         fp.close()
-    return render_template('index.html',  email=email, check=check, letters_img=letters_img, alertt = 'Concern raised successfully !')
+    return render_template('index.html',  email=email, check=check, letters_img=letters_img, alertt='Concern raised successfully !')
+
+
+@app.route('/video_feed1')
+def video_feed1():
+    return Response(gt.convert(1), mimetype='multipart/x-mixed-replace; boundary=frame')
+
 
 @app.route("/gest_text_upload", methods=['GET', 'POST'])
 def gest_text_upload():
@@ -220,8 +235,14 @@ def gest_text_upload():
     file = request.files['f2']
     file.save("./static/uploaded/video.mp4")
     gt.convert(1)
-    os.remove("./static/uploaded/video.mp4")
-    return render_template('index.html', email=email,  check= check, letters_img=letters_img)
+    # os.remove("./static/uploaded/video.mp4")
+    return render_template('index.html',scroll='sign2text', upload=1, email=email,  check=check, letters_img=letters_img)
+
+
+@app.route('/video_feed')
+def video_feed():
+    return Response(gt.convert(0), mimetype='multipart/x-mixed-replace; boundary=frame')
+
 
 @app.route("/gest_text_cam", methods=['GET', 'POST'])
 def gest_text_cam():
@@ -232,7 +253,8 @@ def gest_text_cam():
         check = 0
         email = ''
     gt.convert(0)
-    return render_template('index.html',  email=email, check=check, letters_img=letters_img)
+    return render_template('index.html',scroll='sign2text', webcam=1,  email=email, check=check, letters_img=letters_img)
+
 
 @app.route("/logout")
 def logout():
@@ -241,12 +263,13 @@ def logout():
     session.pop('email')
     return render_template("index.html", check=0, letters_img=letters_img)
 
+
 if __name__ == "__main__":
     global letters_img
     letters_img = []
     for i in "abcdefghijklmnopqrstuvwxyz":
         url = "../static/assets/img/letters/" + i + ".jpg"
         letters_img.append(url)
-    
+
     print('Server Started !!')
     app.run(debug=True, use_reloader=False)

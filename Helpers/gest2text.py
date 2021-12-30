@@ -108,7 +108,11 @@ def convert(flag):
                 cv2.rectangle(image, (0,0), (640, 40), (245, 117, 16), -1)
                 cv2.putText(image, ' '.join(sentence), (3,30), 
                             cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
-                cv2.imshow('OpenCV Feed', image)
+                # cv2.imshow('OpenCV Feed', image)
+                ret, buffer = cv2.imencode('.jpg', image)
+                image = buffer.tobytes()
+                yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + image + b'\r\n')
+                
                 if cv2.waitKey(10) & 0xFF == ord('q'):
                     break
             else:
@@ -132,7 +136,12 @@ def convert(flag):
                 cv2.rectangle(image, (0,0), (640, 40), (245, 117, 16), -1)
                 cv2.putText(image, ' '.join(sentence), (3,30), 
                             cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
-                cv2.imshow('OpenCV Feed', image)
+                # cv2.imshow('OpenCV Feed', image)
+
+                ret, buffer = cv2.imencode('.jpg', image)
+                image = buffer.tobytes()
+                yield (b'--frame\r\n' b'Content-Type: image/jpeg\r\n\r\n' + image + b'\r\n')
+                
                 if cv2.waitKey(10) & 0xFF == ord('q'):
                     break
         cap.release()

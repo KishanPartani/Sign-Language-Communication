@@ -68,7 +68,7 @@
     {% if scroll %}
     <script>
       // document.getElementById("{{ scroll }}").scrollIntoView();
-      console.log("scroll called")
+      console.log("scroll called");
       // or
       document.location.hash = "#" + "{{ scroll }}";
     </script>
@@ -333,7 +333,7 @@
         </div>
       </section>
       <div class="text-center mb-5 p-5">
-        <img src="../static/assets/img/div.png" />
+        <img src="../static/assets/img/div.png" width="50%" />
       </div>
       <!-- Sign to Text Section -->
 
@@ -377,27 +377,20 @@
                     />
                   </div>
                 </div>
-                <div class="row">
-                  <div class="col-3"></div>
-                  <div class="col-3">
-                    <button
-                      style="width: 150px"
-                      class="btn get-started-btn"
-                      type="submit"
-                    >
-                      <strong> Upload </strong>
-                    </button>
-                  </div>
-                  <div class="col-3">
-                    <button
-                      style="width: 150px"
-                      class="btn get-started-btn"
-                      onclick="this.form.action = '/gest_text_cam'"
-                    >
-                      <strong> Start Webcam </strong>
-                    </button>
-                  </div>
-                </div>
+                <button
+                  style="width: 150px"
+                  class="btn get-started-btn"
+                  type="submit"
+                >
+                  <strong> Upload </strong>
+                </button>
+                <button
+                  style="width: 150px"
+                  class="btn get-started-btn"
+                  onclick="this.form.action = '/gest_text_cam'"
+                >
+                  <strong> Start Webcam </strong>
+                </button>
               </form>
               <br />
               <blockquote class="blockquote pt-2">
@@ -409,10 +402,22 @@
               </blockquote>
             </div>
             <div
-              class="image col-lg-6"
+              class="image col-lg-6 p-0"
               style="background-image: url('../static/assets/img/8.jpg')"
               data-aos="fade-left"
-            ></div>
+            >
+              {% if webcam %}
+              <img src="{{ url_for('video_feed') }}" width="100%" />
+              <!-- <button>Close</button> -->
+              {% endif %} {% if upload %}
+              <img
+                class="image"
+                src="{{ url_for('video_feed1') }}"
+                width="100%"
+              />
+              <!-- <button>Close</button> -->
+              {% endif %}
+            </div>
           </div>
         </div>
       </section>
