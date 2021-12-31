@@ -365,18 +365,15 @@
                 method="post"
                 enctype="multipart/form-data"
               >
-                <div class="row mb-3">
-                  <div class="col-2"></div>
-                  <div class="col-8">
-                    <input
-                      type="file"
-                      class="btn get-started-btn"
-                      name="f2"
-                      id="f2"
-                      style="padding-right: 115px"
-                    />
-                  </div>
+                <div class="mb-2">
+                  <input
+                    type="file"
+                    class="btn get-started-btn"
+                    name="f2"
+                    id="f2"
+                  />
                 </div>
+
                 <button
                   style="width: 150px"
                   class="btn get-started-btn"
@@ -407,8 +404,13 @@
               data-aos="fade-left"
             >
               {% if webcam %}
-              <img src="{{ url_for('video_feed') }}" width="100%" />
-              <!-- <button>Close</button> -->
+              <!-- <center> </center> -->
+              <img
+                class="image"
+                src="{{ url_for('video_feed') }}"
+                width="100%"
+              />
+              <a class="text-center close-btn" href="/#sign2text">X</a>
               {% endif %} {% if upload %}
               <img
                 class="image"

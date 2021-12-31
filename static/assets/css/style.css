@@ -18,7 +18,7 @@ body {
 
 .zoom:hover {
   transform: scale(1.03);
-  box-shadow: 3px 3px 15px rgba(33,33,33,.8)
+  box-shadow: 3px 3px 15px rgba(33, 33, 33, 0.8);
 }
 
 .video {
@@ -160,26 +160,40 @@ h6 {
 #header .logo img {
   max-height: 40px;
 }
-
-.upload-btn{
+.close-btn {
+  position: absolute;
+  top: 5%;
+  left: 95%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  background-color: transparent;
+  color: black;
+  font-size: 16px;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: center;
+}
+.upload-btn {
   width: 150px;
 }
-.search-btn{
+.search-btn {
   width: 150px;
-  color: #514226  ;
+  color: #514226;
   border-radius: 4px;
   padding: 7px 25px 8px 25px;
   white-space: nowrap;
   transition: 0.3s;
   font-size: 14px;
   display: inline-block;
-  border: 2px solid #514226;;
+  border: 2px solid #514226;
 }
-.search-btn:hover{
-  background:#514226; ;
+.search-btn:hover {
+  background: #514226;
   color: #fff;
 }
-.form-control::placeholder{
+.form-control::placeholder {
   color: #514226;
 }
 /*--------------------------------------------------------------
