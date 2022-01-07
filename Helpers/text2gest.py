@@ -1,8 +1,8 @@
-from nltk import text
+# from nltk import text
 from nltk.util import pr
 import pandas as pd
 import numpy as np
-from nltk.corpus import stopwords
+# from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 import os
 import cv2

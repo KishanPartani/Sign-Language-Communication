@@ -2,10 +2,10 @@ import cv2
 import numpy as np
 import os
 from matplotlib import pyplot as plt
-import time
+# import time
 import mediapipe as mp
 from tensorflow import keras
-import math
+# import math
 import tensorflow as tf
 
 mp_holistic = mp.solutions.holistic
